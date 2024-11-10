@@ -1,29 +1,25 @@
 ﻿@page "/"
+@using BibliotekarzBlazor.Shared.Components.CascadeComponents
 
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h3>Wybierz opcję</h3>
+<input @bind-value="firstOptionValue" type="checkbox"/> Pierwsza opcja
 
-Welcome to your new app. Current main value = @lastMultipleOfThree.
+<br/>
+<input @bind-value="secondOptionValue" type="checkbox"/> Druga opcja
 
-<MyFirstComponent @bind-CurrentValue="@lastMultipleOfThree" />
+<br/>
 
-<Counter OnMultipleOfThree="OnMultipleOfThreeCalled"  />
+<CascadingValue Name="FirstOption" Value="firstOptionValue">
+    <CascadingValue Name="SecondOption" Value="secondOptionValue">
+        <FirstLevelComponent/>
+    </CascadingValue>
+</CascadingValue>
 
 @code
 {
-    int lastMultipleOfThree = 0;
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-
-        Console.WriteLine("Hello World!");
-    }
-
-    private void OnMultipleOfThreeCalled(int count)
-    {
-        lastMultipleOfThree = count;
-    }
+    bool firstOptionValue;
+    bool secondOptionValue;
 }

@@ -1,0 +1,19 @@
+﻿<h3>ThirdLevelComponent</h3>
+
+<ul>
+    <li>
+        FirstOption = @FirstOption
+    </li>
+    <li>
+        SecondOption = @SecondOption
+    </li>
+</ul>
+
+
+@code {
+    [CascadingParameter(Name = nameof(FirstOption))]
+    private bool FirstOption { get; set; }
+    
+    [CascadingParameter(Name = "SecondOption")]
+    private bool SecondOption { get; set; }
+}
