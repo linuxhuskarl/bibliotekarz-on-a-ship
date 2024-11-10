@@ -1,19 +1,33 @@
 ﻿@page "/"
-
+@page "/home/{Id:int}/{CosInnego?}"
+@using System.Web
+@inject NavigationManager navigation;
 
 <PageTitle>Home</PageTitle>
 
 <MyCustomImage Src="assets/images/logo.png" width="128" height="64" />
 
+Odczytany parametr Id = @Id; cosInnego = @CosInnego, cos1 = @cos1.
+
 @code
 {
+    string cos1;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter] 
+    public string CosInnego { get; set; }
+
+
+
     Dictionary<string, object> AdditionalAttributes;
 
     protected override void OnInitialized()
     {
         AdditionalAttributes = new Dictionary<string, object>
         {
-            ["id"] = "Logos 2",
+            ["Id"] = "Logos 2",
             ["alt"] = "A logo of dotnet"
         };
 
@@ -21,5 +35,10 @@
         {
             AdditionalAttributes.Add("attribute_" + i, i);
         }
+
+        Uri currentUri = new Uri(navigation.Uri);
+        var parameters = HttpUtility.ParseQueryString(currentUri.Query);
+
+        cos1 = parameters["cos1"];
     }
 }

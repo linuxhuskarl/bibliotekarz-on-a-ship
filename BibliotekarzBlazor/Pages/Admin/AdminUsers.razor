@@ -1,0 +1,15 @@
+﻿@page "/admin/{*PageRoute}"
+
+
+@layout EmptyLayout
+
+
+<h3>Users</h3>
+
+PageRoute = @PageRoute
+
+@code
+{
+    [Parameter]
+    public string? PageRoute { get; set; }
+}
