@@ -1,0 +1,25 @@
+﻿@page "/counter"
+@using System.Security.AccessControl
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private async Task IncrementCount()
+    {
+        currentCount++;
+
+        if (currentCount % 3 == 0)
+            await OnMultipleOfThree.InvokeAsync(currentCount);
+    }
+
+    [Parameter]
+    public EventCallback<int> OnMultipleOfThree { get; set; }
+}

@@ -1,0 +1,29 @@
+﻿@page "/"
+
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<MyFirstComponent CurrentValue="@lastMultipleOfThree" />
+
+<Counter OnMultipleOfThree="OnMultipleOfThreeCalled" />
+
+@code
+{
+    int lastMultipleOfThree = 0;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Console.WriteLine("Hello World!");
+    }
+
+    private void OnMultipleOfThreeCalled(int count)
+    {
+        lastMultipleOfThree = count;
+    }
+}
