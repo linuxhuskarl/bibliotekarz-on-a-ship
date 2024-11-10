@@ -2,7 +2,18 @@
     <h2>Aktualna wartość to @CurrentValue</h2>
 </div>
 
+<button @onclick="UpdateCurrentCounterValue">Update</button>
+
 @code {
     [Parameter]
     public int CurrentValue { get; set; } = 0;
+
+    [Parameter]
+    public EventCallback<int> CurrentValueChanged { get; set; }
+
+    private void UpdateCurrentCounterValue(MouseEventArgs e)
+    {
+        CurrentValue++;
+        CurrentValueChanged.InvokeAsync(CurrentValue);
+    }
 }
