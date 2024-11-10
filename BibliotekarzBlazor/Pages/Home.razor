@@ -1,25 +1,25 @@
 ﻿@page "/"
-@using BibliotekarzBlazor.Shared.Components.CascadeComponents
 
 
 <PageTitle>Home</PageTitle>
 
-<h3>Wybierz opcję</h3>
-<input @bind-value="firstOptionValue" type="checkbox"/> Pierwsza opcja
-
-<br/>
-<input @bind-value="secondOptionValue" type="checkbox"/> Druga opcja
-
-<br/>
-
-<CascadingValue Name="FirstOption" Value="firstOptionValue">
-    <CascadingValue Name="SecondOption" Value="secondOptionValue">
-        <FirstLevelComponent/>
-    </CascadingValue>
-</CascadingValue>
+<MyCustomImage Src="assets/images/logo.png" width="128" height="64" />
 
 @code
 {
-    bool firstOptionValue;
-    bool secondOptionValue;
+    Dictionary<string, object> AdditionalAttributes;
+
+    protected override void OnInitialized()
+    {
+        AdditionalAttributes = new Dictionary<string, object>
+        {
+            ["id"] = "Logos 2",
+            ["alt"] = "A logo of dotnet"
+        };
+
+        for (int i = 0; i < 5; i++)
+        {
+            AdditionalAttributes.Add("attribute_" + i, i);
+        }
+    }
 }
