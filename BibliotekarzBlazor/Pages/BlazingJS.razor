@@ -1,0 +1,22 @@
+﻿@page "/blazingjs"
+@inject IJSRuntime JSRuntime;
+
+<h3>BlazingJS</h3>
+
+<div >
+    <button class="btn btn-secondary" @onclick="InvitationToTheParty">Invate</button>
+</div>
+<div>
+    <p>Potwierdzono: @IsConfirmed</p>
+</div>
+
+@code {
+
+    public bool IsConfirmed { get; set; }
+
+    private async Task InvitationToTheParty()
+    {
+        IsConfirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Czy będziesz na imprezie?");
+    }
+
+}
