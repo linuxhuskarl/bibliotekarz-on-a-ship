@@ -9,36 +9,10 @@
 
 Odczytany parametr Id = @Id; cosInnego = @CosInnego, cos1 = @cos1.
 
-@code
-{
-    string cos1;
+Licznik = @count
 
-    [Parameter]
-    public int Id { get; set; }
-
-    [Parameter] 
-    public string CosInnego { get; set; }
-
-
-
-    Dictionary<string, object> AdditionalAttributes;
-
-    protected override void OnInitialized()
-    {
-        AdditionalAttributes = new Dictionary<string, object>
-        {
-            ["Id"] = "Logos 2",
-            ["alt"] = "A logo of dotnet"
-        };
-
-        for (int i = 0; i < 5; i++)
-        {
-            AdditionalAttributes.Add("attribute_" + i, i);
-        }
-
-        Uri currentUri = new Uri(navigation.Uri);
-        var parameters = HttpUtility.ParseQueryString(currentUri.Query);
-
-        cos1 = parameters["cos1"];
-    }
-}
+<button class="btn btn-primary" @onclick="IncrementCount">Nav 1</button>
+<button class="btn btn-primary" @onclick="NavigateToUrl">Relative</button>
+<button class="btn btn-primary" @onclick="NavigateToAbsoluteUrl">Absolute</button>
+<button class="btn btn-primary" @onclick="NavigateWithReplaceHistory">Replace history</button>
+<NavLink href="/counter">Counter</NavLink>
