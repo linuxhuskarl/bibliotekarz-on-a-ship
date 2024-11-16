@@ -35,7 +35,19 @@
         <InputTextArea class="form-control" @bind-Value="@person.Address" placeholder="Twój adres ..."/>
         <ValidationMessage For="() => person.Address" />
     </div>
-
+    
+    <div>
+        <InputNumber class="form-control" @bind-Value="@person.Day" />
+        <ValidationMessage For="() => person.Day" />
+    </div>
+    <div>
+        <InputNumber class="form-control" @bind-Value="@person.Month" />
+        <ValidationMessage For="() => person.Month" />
+    </div>
+    <div>
+        <InputNumber class="form-control" @bind-Value="@person.Year" />
+        <ValidationMessage For="() => person.Year" />
+    </div>
 
     <button class="btn btn-primary" type="submit">Zapisz</button>
 </EditForm>
