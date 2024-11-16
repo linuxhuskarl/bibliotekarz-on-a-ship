@@ -1,25 +1,41 @@
 ﻿@page "/"
-@page "/home/{Id:int}/{CosInnego?}"
-@using System.Web
-@inject NavigationManager navigation;
 
 <PageTitle>Home</PageTitle>
 
-<MyCustomImage Src="assets/images/logo.png" width="128" height="64" />
+<EditForm Model="@person" OnValidSubmit="@AddPerson">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    
+    <div>
+        <InputText class="form-control" @bind-Value="@person.Name" placeholder="Twoja nazwa ..."/>
+        <ValidationMessage For="() => person.Name"/>
+    </div>
+    
+    <div>
+        <InputNumber class="form-control" @bind-Value="@person.Age" placeholder="Twój wiek ..." />
+        <ValidationMessage For="() => person.Age" />
+    </div>
+    
+    <div>
+        <InputText class="form-control" @bind-Value="@person.Mail" placeholder="Twój email ..." />
+        <ValidationMessage For="() => person.Mail" />
+    </div>
+    
+    <div>
+        <InputText class="form-control" @bind-Value="@person.ConfirmMail" placeholder="Potwierdź email ..." />
+        <ValidationMessage For="() => person.ConfirmMail" />
+    </div>
+    
+    <div>
+        <InputText class="form-control" @bind-Value="@person.Password" placeholder="Twoje hasło..." />
+        <ValidationMessage For="() => person.Password" />
+    </div>
+    
+    <div>
+        <InputTextArea class="form-control" @bind-Value="@person.Address" placeholder="Twój adres ..."/>
+        <ValidationMessage For="() => person.Address" />
+    </div>
 
-Odczytany parametr Id = @Id; cosInnego = @CosInnego, cos1 = @cos1.
 
-Licznik = @count
-
-<button class="btn btn-primary" @onclick="IncrementCount">Nav 1</button>
-<button class="btn btn-primary" @onclick="NavigateToUrl">Relative</button>
-<button class="btn btn-primary" @onclick="NavigateToAbsoluteUrl">Absolute</button>
-<button class="btn btn-primary" @onclick="NavigateWithReplaceHistory">Replace history</button>
-<NavLink href="/counter">Counter</NavLink>
-
-<Child>
-    <ChildContent>
-        Wiadomość 1
-    </ChildContent>
-
-</Child>
+    <button class="btn btn-primary" type="submit">Zapisz</button>
+</EditForm>
