@@ -17,7 +17,9 @@
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
-        @Body
+        <MudPaper Elevation="0" Square="false" Class="pa-4" >
+            @Body
+        </MudPaper>
     </MudMainContent>
 </MudLayout>
 @code {

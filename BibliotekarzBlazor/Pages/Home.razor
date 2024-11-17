@@ -1,53 +1,28 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<MudGrid>
+    <MudItem sm="6" xs="12">
+        <MudTextField @bind-Value="FilterText" 
+                      Label="Filtrowanie" 
+                      Variant="Variant.Outlined" 
+                      Adornment="Adornment.End" 
+                      AdornmentIcon="@Icons.Material.Filled.Search" />
+    </MudItem>
+    
 
-<EditForm Model="@person" OnValidSubmit="@AddPerson">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    
-    <div>
-        <InputText class="form-control" @bind-Value="@person.Name" placeholder="Twoja nazwa ..."/>
-        <ValidationMessage For="() => person.Name"/>
-    </div>
-    
-    <div>
-        <InputNumber class="form-control" @bind-Value="@person.Age" placeholder="Twój wiek ..." />
-        <ValidationMessage For="() => person.Age" />
-    </div>
-    
-    <div>
-        <InputText class="form-control" @bind-Value="@person.Mail" placeholder="Twój email ..." />
-        <ValidationMessage For="() => person.Mail" />
-    </div>
-    
-    <div>
-        <InputText class="form-control" @bind-Value="@person.ConfirmMail" placeholder="Potwierdź email ..." />
-        <ValidationMessage For="() => person.ConfirmMail" />
-    </div>
-    
-    <div>
-        <InputText class="form-control" @bind-Value="@person.Password" placeholder="Twoje hasło..." />
-        <ValidationMessage For="() => person.Password" />
-    </div>
-    
-    <div>
-        <InputTextArea class="form-control" @bind-Value="@person.Address" placeholder="Twój adres ..."/>
-        <ValidationMessage For="() => person.Address" />
-    </div>
-    
-    <div>
-        <InputNumber class="form-control" @bind-Value="@person.Day" />
-        <ValidationMessage For="() => person.Day" />
-    </div>
-    <div>
-        <InputNumber class="form-control" @bind-Value="@person.Month" />
-        <ValidationMessage For="() => person.Month" />
-    </div>
-    <div>
-        <InputNumber class="form-control" @bind-Value="@person.Year" />
-        <ValidationMessage For="() => person.Year" />
-    </div>
+    <MudItem>
+    <MudDataGrid Items="@BookList">
+        <Columns>
+            <PropertyColumn Property="x => x.Title" Title="Tytuł" />
+            <PropertyColumn Property="x => x.Author" Title="Autor"/>
+            <PropertyColumn Property="x => x.PageCount" Title="Liczba stron"/>
+            <PropertyColumn Property="x => x.IsBorrowed" Title="Czy wypożyczona" />
+            <PropertyColumn Property="x => x.Borrower.FirstName" Title="Imię wyp." />
+            <PropertyColumn Property="x => x.Borrower.LastName" Title="Nazwisko wyp." />
+        </Columns>
+    </MudDataGrid>
 
-    <button class="btn btn-primary" type="submit">Zapisz</button>
-</EditForm>
+    </MudItem>
+
+</MudGrid>
+

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BibliotekarzBlazor", "BibliotekarzBlazor\BibliotekarzBlazor.csproj", "{02EF798F-AF05-4FD7-806D-A4BF4D78A465}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliotekarzBlazor.Shared", "BibliotekarzBlazor.Shared\BibliotekarzBlazor.Shared.csproj", "{6B392C0F-640E-4185-A21E-6142B6B51F4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{02EF798F-AF05-4FD7-806D-A4BF4D78A465}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02EF798F-AF05-4FD7-806D-A4BF4D78A465}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02EF798F-AF05-4FD7-806D-A4BF4D78A465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B392C0F-640E-4185-A21E-6142B6B51F4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B392C0F-640E-4185-A21E-6142B6B51F4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B392C0F-640E-4185-A21E-6142B6B51F4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B392C0F-640E-4185-A21E-6142B6B51F4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
