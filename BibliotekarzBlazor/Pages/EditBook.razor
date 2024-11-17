@@ -1,0 +1,29 @@
+﻿@page "/edit-book/{Id:int}"
+
+<h3>EditBook</h3>
+
+<MudGrid Class="mt-4">
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <MudForm Spacing="4">
+                <MudTextField T="string" Label="Tytuł" @bind-Text="Book.Title" />
+                <MudTextField T="string" Label="Autor" @bind-Text="Book.Author" />
+                <MudNumericField T="int" Label="Liczba stron" @bind-Value="Book.PageCount" />
+                <MudCheckBox T="bool" Label="Czy wypożyczona" @bind-Value="Book.IsBorrowed" />
+                
+                @if (Book.IsBorrowed)
+                {
+                    <MudTextField T="string" Label="Imię wypożyczającego" @bind-Text="Book.Borrower.FirstName" />
+                    <MudTextField T="string" Label="Nazwisko wypożyczającego" @bind-Text="Book.Borrower.LastName" />
+                }
+                
+                <MudPaper Class="d-flex justify-end flex-grow-1 gap-4" Elevation="0" Outlined="false">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                               OnClick="OnSaveClick">Zapisz</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary"
+                               OnClick="OnCancelClick">Anuluj</MudButton>
+                </MudPaper>
+            </MudForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
