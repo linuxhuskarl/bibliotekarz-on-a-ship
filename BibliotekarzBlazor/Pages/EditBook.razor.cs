@@ -5,7 +5,7 @@ using MudBlazor;
 
 namespace BibliotekarzBlazor.Pages;
 
-public partial class EditBook
+public partial class EditBook : ComponentBase
 {
     [Parameter]
     public int Id { get; set; }
