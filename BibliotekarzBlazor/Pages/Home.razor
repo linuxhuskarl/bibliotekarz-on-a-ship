@@ -2,25 +2,33 @@
 
 <MudGrid>
     <MudItem sm="6" xs="12">
-        <MudTextField @bind-Value="FilterText" 
-                      Label="Filtrowanie" 
-                      Variant="Variant.Outlined" 
-                      Adornment="Adornment.End" 
+        <MudTextField @bind-Value="FilterText"
+                      Label="Filtrowanie"
+                      Variant="Variant.Outlined"
+                      Adornment="Adornment.End"
                       AdornmentIcon="@Icons.Material.Filled.Search" />
     </MudItem>
-    
+
 
     <MudItem>
-    <MudDataGrid Items="@BookList">
-        <Columns>
-            <PropertyColumn Property="x => x.Title" Title="Tytuł" />
-            <PropertyColumn Property="x => x.Author" Title="Autor"/>
-            <PropertyColumn Property="x => x.PageCount" Title="Liczba stron"/>
-            <PropertyColumn Property="x => x.IsBorrowed" Title="Czy wypożyczona" />
-            <PropertyColumn Property="x => x.Borrower.FirstName" Title="Imię wyp." />
-            <PropertyColumn Property="x => x.Borrower.LastName" Title="Nazwisko wyp." />
-        </Columns>
-    </MudDataGrid>
+        <MudDataGrid Items="@BookList">
+            <Columns>
+                <PropertyColumn Property="x => x.Title" Title="Tytuł" />
+                <PropertyColumn Property="x => x.Author" Title="Autor" />
+                <PropertyColumn Property="x => x.PageCount" Title="Liczba stron" />
+                <PropertyColumn Property="x => x.IsBorrowed" Title="Czy wypożyczona" />
+                <PropertyColumn Property="x => x.Borrower.FirstName" Title="Imię wyp." />
+                <PropertyColumn Property="x => x.Borrower.LastName" Title="Nazwisko wyp." />
+                <TemplateColumn CellClass="d-flex justify-end">
+                    <CellTemplate>
+                        <MudStack Row>
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" aria-label="edit" OnClick="() => OnEditClick(context.Item.Id)" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="() => OnDeleteClick(context.Item.Id)" />
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+        </MudDataGrid>
 
     </MudItem>
 

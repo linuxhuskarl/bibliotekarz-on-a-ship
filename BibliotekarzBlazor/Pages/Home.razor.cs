@@ -13,6 +13,8 @@ public partial class Home
 
     public List<BookDto> BookList { get; set; }
 
+    [Inject]
+    public NavigationManager Navigation { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -45,5 +47,15 @@ public partial class Home
                 LastName = "Kowalski"
             }
         }];
+    }
+
+    private void OnEditClick(int bookId)
+    {
+        Navigation.NavigateTo($"edit-book/{bookId}");
+    }
+
+    private async Task OnDeleteClick(int bookId)
+    {
+        
     }
 }
