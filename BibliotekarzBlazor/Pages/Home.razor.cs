@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using System.Web;
 using BibliotekarzBlazor.Model;
+using BibliotekarzBlazor.Services;
 using BibliotekarzBlazor.Shared.DTOs;
 using Microsoft.AspNetCore.Components.Forms;
 
@@ -16,6 +17,9 @@ public partial class Home
     [Inject]
     public NavigationManager Navigation { get; set; }
 
+    [Inject]
+    public IBookProxyService BookService { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         await GetData();
@@ -23,30 +27,7 @@ public partial class Home
 
     private async Task GetData()
     {
-        BookList = [
-        new()
-        {
-            Id = 1,
-            Title = "Harry Potter",
-            Author = "J.K. Rowling",
-            PageCount = 300,
-            IsBorrowed = false,
-            Borrower = null
-        },
-        new()
-        {
-            Id = 2,
-            Title = "Wiedźmin",
-            Author = "Andrzej Sapkowski",
-            PageCount = 400,
-            IsBorrowed = true,
-            Borrower = new()
-            {
-                Id = 1,
-                FirstName = "Jan",
-                LastName = "Kowalski"
-            }
-        }];
+        BookList = (await BookService.GetAll())?.ToList() ?? [];
     }
 
     private void OnEditClick(int bookId)

@@ -1,4 +1,6 @@
 
+using BibliotekarzBlazor.Api.Services;
+
 namespace BibliotekarzBlazor.Api
 {
     public class Program
@@ -13,6 +15,8 @@ namespace BibliotekarzBlazor.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IBookService, BookService>();
 
             var app = builder.Build();
 
