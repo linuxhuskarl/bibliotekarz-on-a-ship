@@ -1,0 +1,51 @@
+﻿@page "/login"
+@using Blazored.FluentValidation
+@using Microsoft.AspNetCore.Authorization
+@layout MainLayout
+@attribute [AllowAnonymous]
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudPaper Class="pa-4" Style="@("background: white;")">
+        <EditForm Model="@requestModel" OnValidSubmit="SubmitAsync">
+            <FluentValidationValidator @ref="_fluentValidationValidator" />
+            <MudGrid>
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+                        <MudIcon Icon="@Icons.Material.Filled.Book" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 23 25" Style="width: 150px; height: 160px;" />
+                    </div>
+                </MudItem>
+                <DataAnnotationsValidator />
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h4">Logowanie</MudText>
+                    </div>
+                </MudItem>
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+                        <MudText>Strona logowania użytkownika</MudText>
+                    </div>
+                </MudItem>
+                <MudItem xs="12">
+            @* <div class="d-flex justify-center">
+                <MudText>Nie masz konta? <MudLink Href="/register">Stwórz konto!</MudLink></MudText>
+            </div> *@
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Nazwa użytkownika" Variant="Variant.Outlined"
+                                  @bind-Value="requestModel.UserName" For="@(() => requestModel.UserName)" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Label="Hasło" Variant="Variant.Outlined"
+                                  @bind-Value="requestModel.Password" For="@(() => requestModel.Password)"
+                                  InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+                </MudItem>
+                <MudItem xs="12" Class="d-flex justify-space-between align-center">
+                    <MudCheckBox T="bool" Label="Zapamiętaj logowanie" Color="Color.Primary" Class="ml-n1"></MudCheckBox>
+                </MudItem>
+                <MudItem xs="12" Class="d-flex justify-center">
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">Zaloguj</MudButton>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </MudPaper>
+</MudContainer>

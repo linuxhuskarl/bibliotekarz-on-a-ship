@@ -1,0 +1,81 @@
+﻿@page "/register"
+@using BibliotekarzBlazor.Shared
+@using Blazored.FluentValidation
+@using Microsoft.AspNetCore.Authorization
+@layout MainLayout
+@attribute [AllowAnonymous]
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudPaper Class="pa-4" Style="@("background: white;")">
+
+        <EditForm Model="@requestModel" OnValidSubmit="SubmitAsync">
+            <FluentValidationValidator @ref="_fluentValidationValidator" />
+            <MudGrid>
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+                        <MudIcon Icon="@Icons.Material.Filled.Book" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 23 25" Style="width: 150px; height: 160px;" />
+                    </div>
+                </MudItem>
+                <DataAnnotationsValidator />
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h4">Rejestracja</MudText>
+                    </div>
+                </MudItem>
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+                        <MudText>Strona rejestracji nowego użytkownika użytkownika</MudText>
+                    </div>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Nazwa użytkownika" Variant="Variant.Outlined"
+                                  @bind-Value="requestModel.UserName" For="@(() => requestModel.UserName)" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Email" Variant="Variant.Outlined"
+                                  @bind-Value="requestModel.Email" For="@(() => requestModel.Email)" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Telefon" Variant="Variant.Outlined"
+                                  @bind-Value="requestModel.PhoneNumber" For="@(() => requestModel.PhoneNumber)" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField Label="Hasło" Variant="Variant.Outlined"
+                                  @bind-Value="requestModel.Password" For="@(() => requestModel.Password)"
+                                  InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField Label="Potwierdź hasło" Variant="Variant.Outlined"
+                                  @bind-Value="requestModel.ConfirmPassword" For="@(() => requestModel.ConfirmPassword)"
+                                  InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Imię" Variant="Variant.Outlined"
+                                  @bind-Value="requestModel.FirstName" For="@(() => requestModel.FirstName)" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Nazwisko" Variant="Variant.Outlined"
+                                  @bind-Value="requestModel.LastName" For="@(() => requestModel.LastName)" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudSelect @bind-SelectedValues="SelectedRoles">
+                        <MudSelectItem Value="@Constants.Role_User">@Constants.Role_User</MudSelectItem>
+                        <MudSelectItem Value="@Constants.Role_Admin">@Constants.Role_Admin</MudSelectItem>
+                    </MudSelect>
+
+                </MudItem>
+
+                <MudItem xs="12" Class="d-flex justify-center">
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">Rejestracja</MudButton>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </MudPaper>
+</MudContainer>
