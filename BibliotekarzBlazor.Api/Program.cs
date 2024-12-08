@@ -3,6 +3,7 @@ using Bibliotekarz.Data.Context;
 using Bibliotekarz.Data.Model;
 using Bibliotekarz.Data.Repositories;
 using BibliotekarzBlazor.Api.Services;
+using BibliotekarzBlazor.Shared.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,9 @@ public class Program
             .AddSignInManager()
             .AddDefaultTokenProviders()
             ;
+
+        var jwtOptions = builder.Configuration.GetSection("JwtOptions");
+        builder.Services.Configure<JwtOptions>(jwtOptions);
 
         builder.Services.AddAuthorization(options =>
         {
