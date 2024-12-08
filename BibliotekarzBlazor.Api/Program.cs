@@ -3,14 +3,24 @@ using Bibliotekarz.Data.Model;
 using Bibliotekarz.Data.Repositories;
 using BibliotekarzBlazor.Api.Services;
 using Microsoft.EntityFrameworkCore;
+using NLog;
+using NLog.Web;
 
 namespace BibliotekarzBlazor.Api;
 
 public class Program
 {
+    // Early init of NLog to allow startup and exception logging, before host is built
+
     public static void Main(string[] args)
     {
+        var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+        logger.Debug("init main");
+
         var builder = WebApplication.CreateBuilder(args);
+        // NLog: Setup NLog for Dependency injection
+        builder.Logging.ClearProviders();
+        builder.Host.UseNLog();
 
         // Add services to the container.
 
@@ -28,6 +38,8 @@ public class Program
         builder.Services.AddScoped(typeof(IKeyRepository<,>), typeof(KeyRepository<,>));
         
         builder.Services.AddScoped<IBookService, BookService>();
+
+
 
         var app = builder.Build();
 
