@@ -1,7 +1,10 @@
+using System.Security.Claims;
 using Bibliotekarz.Data.Context;
 using Bibliotekarz.Data.Model;
 using Bibliotekarz.Data.Repositories;
 using BibliotekarzBlazor.Api.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
@@ -27,6 +30,29 @@ public class Program
         builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("DefaultConnection"))
             .EnableSensitiveDataLogging().EnableDetailedErrors());
+
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+            options =>
+            {
+                options.SignIn.RequireConfirmedEmail = false;
+            })
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddSignInManager()
+            .AddDefaultTokenProviders()
+            ;
+
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminPolicy", policy => 
+                policy.RequireClaim(ClaimTypes.Role, "Admin"));
+        });
+
+        //builder.Services.AddAuthentication(
+        //    opt => {
+        //    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        //    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        //    }
+        //)
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
