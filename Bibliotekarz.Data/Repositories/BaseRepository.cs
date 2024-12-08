@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Bibliotekarz.Data.Context;
+﻿using System.Linq.Expressions;
 using Bibliotekarz.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -115,20 +109,20 @@ public class BaseRepository<T> : IRepository<T> where T : class
     public virtual async Task AddRangeAsync(IEnumerable<T> entities)
     {
         var enumerable = entities as T[] ?? entities.ToArray();
-        await Context.Set<T>().AddRangeAsync(enumerable);
+        Context.Set<T>().AddRange(enumerable);
         foreach (T entity in enumerable) SetAuditation(entity, Context.Entry(entity));
         await Context.SaveChangesAsync();
     }
 
     public virtual void RemoveRange(IEnumerable<T> entities)
     {
-        Context.Set<T>().AddRange(entities);
+        Context.Set<T>().RemoveRange(entities);
         Context.SaveChanges();
     }
 
     public virtual async Task RemoveRangeAsync(IEnumerable<T> entities)
     {
-        await Context.Set<T>().AddRangeAsync(entities);
+        Context.Set<T>().RemoveRange(entities);
         await Context.SaveChangesAsync();
     }
 

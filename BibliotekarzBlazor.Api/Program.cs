@@ -1,4 +1,6 @@
 using Bibliotekarz.Data.Context;
+using Bibliotekarz.Data.Model;
+using Bibliotekarz.Data.Repositories;
 using BibliotekarzBlazor.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,10 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddScoped<DbContext, AppDbContext>();
+        builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+        builder.Services.AddScoped(typeof(IKeyRepository<,>), typeof(KeyRepository<,>));
+        
         builder.Services.AddScoped<IBookService, BookService>();
 
         var app = builder.Build();
