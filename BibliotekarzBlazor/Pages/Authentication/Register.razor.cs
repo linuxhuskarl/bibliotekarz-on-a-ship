@@ -22,12 +22,26 @@ public partial class Register
     public ISnackbar Snackbar { get; set; }
 
 
+    [Inject]
     public NavigationManager? NavigationManager { get; set; }
+
     public IEnumerable<string> SelectedRoles { get; set; } = [Constants.Role_User];
+
+    [Inject]
+    IAuthenticationProxyService AuthService { get; set; }
 
     private async Task SubmitAsync()
     {
-        //TODO: Implement registration
+        requestModel.Role = SelectedRoles.FirstOrDefault();
+        var result = await AuthService.Register(requestModel);
+        if (result.Succeeded)
+        {
+            NavigationManager!.NavigateTo("/login");
+        }
+        else
+        {
+            Snackbar.Add("Błąd rejestracji.", Severity.Error);
+        }
     }
 
     void TogglePasswordVisibility()

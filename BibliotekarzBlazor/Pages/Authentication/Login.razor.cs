@@ -20,13 +20,34 @@ public partial class Login
     [Inject]
     public NavigationManager? NavigationManager { get; set; }
 
+    [Inject]
+    IAuthenticationProxyService AuthService { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
     }
 
     private async Task SubmitAsync()
     {
-        //TODO: Implement authentication
+        var result = await AuthService.Login(requestModel);
+        if (result.Succeeded)
+        {
+            var absoluteUri = new Uri(NavigationManager!.Uri);
+            var queryParam = HttpUtility.ParseQueryString(absoluteUri.Query);
+            returnUrl = queryParam["returnUrl"];
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/" + returnUrl);
+            }
+        }
+        else
+        {
+            Snackbar.Add("Błąd logowania.", Severity.Error);
+        }
 
     }
 
