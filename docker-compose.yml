@@ -1,0 +1,16 @@
+services:
+  bibliotekarzblazor.api:
+    image: ${DOCKER_REGISTRY-}bibliotekarzblazorapi
+    build:
+      context: .
+      dockerfile: BibliotekarzBlazor.Api/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=bibliotekarz-db;Database=BibliotekarzDb;User ID=sa;Password=P@ssw0rd;TrustServerCertificate=true
+  bibliotekarz-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "P@ssw0rd"
+      ACCEPT_EULA: "Y"
+    hostname: bibliotekarz-db
+    ports:
+      - "1433:1433"
